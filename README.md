@@ -1,11 +1,3 @@
-点击入群【[小汪的酱牛肉 ~ 交流反馈：697053454](https://jq.qq.com/?_wv=1027&k=5ZEGGl8)】，获取SQL文件（群文件中即可下载）
-
-## 广告一下
-> 说明：当前项目是【newBlog】是开源的，【notepress】为当前项目的重构升级版，具有更多特性
-- 船新升级版【NotePress】 ，请点击<a href="http://notepress.allen.me" target="_blank"> 链接1</a> 或 <a href="http://notepress.vip" target="_blank">链接2</a> 查看
-- 版本对比：[点我](https://allen.me/content/u/buynotepress) 查看 
-- 授权地址：[点我](https://allen.me/content/u/npbuy) 前往授权
----
 ## v5的一些改动和升级
 1. jpa --> mybatis-plus，更易上手
 2. 升级 layui 版本和 springboot 版本
@@ -20,13 +12,6 @@
 11. 新增用户中心模块
 12. 多种风格配置功能
 13. 增加评论留言邮件回复
-14. 更多请自行体验，最新信息请加入qq群讨论：697053454
-
-> 截图预览的在底部，请往下翻看
-
-## 部署教程
-1. 新建 newBlog数据库，导入db.sql脚本文件(加群，群文件可以下载sql)
-2. 采用 nohup java -jar newBlog.jar >newBlog.log 2>&1 & 后台服务启动即可
 
 ## 更新日志
 ### v5.9.3
