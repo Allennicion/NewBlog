@@ -69,7 +69,7 @@ layui.use('form', function () {
             $("#qiniu").show();
             $("#local").hide();
         } else if (data.value === 'LOCAL') {
-            layer.alert('请确保在「application-newBlog.properties」文件中配置了本地服务器上传路径', {icon: 0});
+            layer.alert('请确保在「application-app.properties」文件中配置了本地服务器上传路径', {icon: 0});
             $("#local").show();
             $("#qiniu").hide();
         } else {

@@ -116,7 +116,7 @@ public class InitListener implements ApplicationListener<ContextRefreshedEvent> 
                 setUpFilePath(defaultUploadPath);
             } catch (Exception e) {
                 log.error("上传路径未正确设置");
-                throw new AppSetException("上传路径未正确设置，原因 --> 文件「application-newBlog.properties」中属性「app.upload.path」未设置或设置有误！", e);
+                throw new AppSetException("上传路径未正确设置，原因 --> 文件「application-app.properties」中属性「app.upload.path」未设置或设置有误！", e);
             }
         }
         log.info("设置文件夹成功");
