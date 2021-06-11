@@ -1,9 +1,4 @@
-/** Created By allen https://allen.me
- * mail to allenwork@163.com
- * 欢迎加入我们，QQ群：697053454
- * if you use the code,  please do not delete the comment
- * 如果您使用了此代码，请勿删除此头部注释
- * */
+
 /*common style*/
 .layui-mt5 {
     margin-top: 5px !important;
@@ -64,12 +59,6 @@ body {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1) !important;
 }
 
-.fixed {
-    position: fixed !important;
-    width: 100% !important;
-    bottom: 0 !important;
-    display: block !important;
-}
 
 #main-body {
     min-height: 333px;
@@ -297,6 +286,7 @@ body:before {
     min-height: 200px;
     background: #FFFFFF;
     border-top: 1px solid rgba(230, 230, 230, 0.45);
+    position: inherit;
 }
 
 .bottom-nav .copyright {
@@ -331,6 +321,11 @@ body:before {
 
 .bottom-nav > .bottom-logo img {
     width: 60%;
+}
+
+.bottom-left-usr {
+    margin: auto;
+    width: max-content;
 }
 
 .logo, .logo:hover {

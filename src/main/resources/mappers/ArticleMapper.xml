@@ -61,10 +61,7 @@
         where a.draft !=1
         <if test="title !=null and title != ''">
             and a.title like concat('%',#{title},'%')
-        </if>
-        and a.id not in(
-        select rac.article_id from refer_article_cate rac where rac.cate_id = #{productCateId}
-        );
+        </if>;
     </select>
 
 </mapper>

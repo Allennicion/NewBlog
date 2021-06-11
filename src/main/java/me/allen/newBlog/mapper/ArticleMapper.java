@@ -74,8 +74,7 @@ public interface ArticleMapper extends BaseMapper<Article> {
      *
      * @param page
      * @param title
-     * @param productCateId
      * @return
      */
-    IPage<Article> findAdminArticlePage(Page<Article> page, @Param("title") String title, @Param("productCateId") long productCateId);
+    IPage<Article> findAdminArticlePage(Page<Article> page, @Param("title") String title);
 }

@@ -134,8 +134,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Override
     public IPage<Article> findAdminArticlePage(Page<Article> page, String title) {
-        Dict productDict = dictMapper.findProductDict();
-        return articleMapper.findAdminArticlePage(page, title, productDict.getId());
+        return articleMapper.findAdminArticlePage(page, title);
     }
 
     @Override

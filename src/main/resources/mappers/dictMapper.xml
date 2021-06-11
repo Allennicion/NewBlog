@@ -18,8 +18,6 @@
     <select id="findProductDict" resultType="me.allen.newBlog.model.entity.Dict">
         select *
         from nb_dict
-        where name = '商品'
-          and `group` = 'cate'
         limit 1;
     </select>
 </mapper>

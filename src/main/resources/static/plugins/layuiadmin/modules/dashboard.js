@@ -1,9 +1,4 @@
-/** Created By allen https://allen.me
- * mail to allenwork@163.com
- * 欢迎加入我们，QQ群：697053454
- * if you use the code,  please do not delete the comment
- * 如果您使用了此代码，请勿删除此头部注释
- * */
+
 layui.define(function (exports) {
 
     //区块轮播切换
@@ -186,7 +181,7 @@ layui.define(function (exports) {
         });
 
 
-        $("#checkUpdate").click(function () {
+/*        $("#checkUpdate").click(function () {
             $.ajax({
                 url: "https://allen.me/checkUpdate",
                 type: "post",
@@ -204,7 +199,7 @@ layui.define(function (exports) {
                     layer.msg("检查更新出错，请稍后再试！");
                 }
             });
-        })
+        })*/
 
     });
 
