@@ -77,8 +77,8 @@ layui.define(['laytpl', 'timeago', 'laypage'], function (exports) {
 
         '<div class="layui-card layui-tags" id="link-panel">' +
         '<div class="layui-card-body">' +
-        '<p class="title">友情链接<small style="float: right;">' +
-        '   <a style="cursor: pointer;" onclick="applyLink(\'{{= d.settings.link_apply_words}}\')" target="_blank"><i>申请 <i class="fa fa-info-circle"></i></i></a></small></p>' +
+        '<p class="title">御坂网络<small style="float: right;">' +
+        '   <a style="cursor: pointer;" onclick="applyLink(\'{{= d.settings.link_apply_words}}\')" target="_blank"><i>更多 <i class="fa fa-info-circle"></i></i></a></small></p>' +
         '<hr>' +
         '{{# layui.each(d.linkList, function(index, item){ }}' +
         '<a href="{{linkSplit(item.name,1)}}" target="_blank" class="layui-text" style="margin-right: 10px;">{{ linkSplit(item.name,0) }}</a>' +
@@ -301,8 +301,8 @@ layui.define(['laytpl', 'timeago', 'laypage'], function (exports) {
 
         '<div class="layui-card layui-tags" id="link-panel">' +
         '<div class="layui-card-body">' +
-        '<p class="title">友情链接<small style="float: right;">' +
-        '   <a style="cursor: pointer;" onclick="applyLink(\'{{= d.settings.link_apply_words}}\')" target="_blank"><i>申请 <i class="fa fa-info-circle"></i></i></a></small></p>' +
+        '<p class="title">御坂网络<small style="float: right;">' +
+        '   <a style="cursor: pointer;" onclick="applyLink(\'{{= d.settings.link_apply_words}}\')" target="_blank"><i>更多 <i class="fa fa-info-circle"></i></i></a></small></p>' +
         '<hr>' +
         '{{# layui.each(d.linkList, function(index, item){ }}' +
         '<a href="{{linkSplit(item.name,1)}}" target="_blank" class="layui-text" style="margin-right: 10px;">{{ linkSplit(item.name,0) }}</a>' +

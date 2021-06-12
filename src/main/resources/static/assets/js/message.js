@@ -137,21 +137,21 @@ layui.define(['laytpl', 'timeago', 'laypage'], function (exports) {
         '</div>' +
         '</div>' +
 
-        '<div class="layui-card" id="desc-panel">' +
-        '<div class="layui-card-body">' +
-        '<div class="layui-text">' +
-        '<p>QQ群：<a href="https://jq.qq.com/?_wv=1027&k=5ZEGGl8" target="_blank">697053454</a> </p>' +
-        '<p class="layui-mt5">GitHub：<a href="https://github.com/miyakowork/newBlog" target="_blank">5.0初始版</a> </p>' +
-        '<p class="layui-mt5">Gitee：<a href="https://gitee.com/allenbn/" target="_blank">5.0初始版</a> </p>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
+        // '<div class="layui-card" id="desc-panel">' +
+        // '<div class="layui-card-body">' +
+        // '<div class="layui-text">' +
+        // '<p>QQ群：<a href="https://jq.qq.com/?_wv=1027&k=5ZEGGl8" target="_blank">697053454</a> </p>' +
+        // '<p class="layui-mt5">GitHub：<a href="https://github.com/miyakowork/newBlog" target="_blank">5.0初始版</a> </p>' +
+        // '<p class="layui-mt5">Gitee：<a href="https://gitee.com/allenbn/" target="_blank">5.0初始版</a> </p>' +
+        // '</div>' +
+        // '</div>' +
+        // '</div>' +
 
 
         '<div class="layui-card layui-tags" id="link-panel">' +
         '<div class="layui-card-body">' +
-        '<p class="title">友情链接<small style="float: right;">' +
-        '   <a style="cursor: pointer;" onclick="applyLink(\'{{= d.settings.link_apply_words}}\')" target="_blank"><i>申请 <i class="fa fa-info-circle"></i></i></a></small></p>' +
+        '<p class="title">御坂网络<small style="float: right;">' +
+        '   <a style="cursor: pointer;" onclick="applyLink(\'{{= d.settings.link_apply_words}}\')" target="_blank"><i>更多 <i class="fa fa-info-circle"></i></i></a></small></p>' +
         '<hr>' +
         '{{# layui.each(d.linkList, function(index, item){ }}' +
         '<a href="{{linkSplit(item.name,1)}}" target="_blank" class="layui-text" style="margin-right: 10px;">{{ linkSplit(item.name,0) }}</a>' +
