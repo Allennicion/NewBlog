@@ -68,10 +68,10 @@ public class QiniuUploadServiceImpl extends ServiceImpl<UploadMapper, Upload> im
                 JSONObject respObj = JSONUtil.parseObj(res.bodyString());
                 String generateFileName = respObj.getStr("key");
                 String qiniuDomain = paramMapper.selectOne(Wrappers.<Param>query().eq("name", NBV5.QINIU_DOMAIN)).getValue();
-                log.info("上传至阿里云服务器成功！，文件：[{}]", generateFileName);
+                log.info("上传至七牛云服务器成功！，文件：[{}]", generateFileName);
                 String src = qiniuDomain + "/" + generateFileName;
                 if (LAYUI_UPLOADER.equalsIgnoreCase(reqType)) {
-                    return new LayUploader().ok("上传至阿里云服务器成功！", src);
+                    return new LayUploader().ok("上传至七牛云服务器成功！", src);
                 } else if (NKEDITOR_UPLOADER.equalsIgnoreCase(reqType)) {
                     return new NkUploader().ok("上传成功！", src);
                 } else if (EDITORMD_UPLOADER.equalsIgnoreCase(reqType)) {
@@ -80,10 +80,10 @@ public class QiniuUploadServiceImpl extends ServiceImpl<UploadMapper, Upload> im
                     return ResultBeanObj.ok("上传成功！", src);
                 }
             } else {
-                message = res != null ? res.error : "上传至阿里云服务失败，返回信息为空！";
+                message = res != null ? res.error : "上传至七牛云服务失败，返回信息为空！";
             }
         } catch (QiniuException e) {
-            message = StrUtil.format("上传至阿里云服务器失败，错误信息：{}", e.getMessage());
+            message = StrUtil.format("上传至七牛云服务器失败，错误信息：{}", e.getMessage());
             e.printStackTrace();
         }
         log.error("上传至七牛服务器失败，错误信息：[{}]", message);
@@ -108,7 +108,7 @@ public class QiniuUploadServiceImpl extends ServiceImpl<UploadMapper, Upload> im
                 String generateFileName = respObj.getStr("key");
                 String qiniuDomain = paramMapper.selectOne(Wrappers.<Param>query().eq("name", NBV5.QINIU_DOMAIN)).getValue();
                 String src = qiniuDomain + "/" + generateFileName;
-                log.info("上传至阿里云服务器成功！，文件：[{}]", generateFileName);
+                log.info("上传至七牛云服务器成功！，文件：[{}]", generateFileName);
                 Upload u = Upload.builder()
                         .diskPath("")
                         .virtualPath(src)
@@ -126,10 +126,10 @@ public class QiniuUploadServiceImpl extends ServiceImpl<UploadMapper, Upload> im
                 }
                 return u;
             } else {
-                throw new RuntimeException("上传文件至阿里云失败" + (res != null ? "，" + res.error : ""));
+                throw new RuntimeException("上传文件至七牛云失败" + (res != null ? "，" + res.error : ""));
             }
         } catch (QiniuException e) {
-            throw new RuntimeException("上传文件至阿里云失败", e);
+            throw new RuntimeException("上传文件至七牛云失败", e);
         }
 
     }

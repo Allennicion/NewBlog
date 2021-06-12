@@ -19,10 +19,10 @@ github_login_onoff = 开启github登录,0
 github_client_id = github登录API Client ID
 github_client_secret = github登录API Client Secret
 
-qiniu_accessKey = 阿里云AccessKey
-qiniu_secretKey = 阿里云SecretKey
-qiniu_bucket = 阿里云bucket
-qiniu_domain = 阿里云文件服务器域名
+qiniu_accessKey = 七牛云AccessKey
+qiniu_secretKey = 七牛云SecretKey
+qiniu_bucket = 七牛云bucket
+qiniu_domain = 七牛云文件服务器域名
 
 [1]
 article_page_size = 文章页面显示条数,12

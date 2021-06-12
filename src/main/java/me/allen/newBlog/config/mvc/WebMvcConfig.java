@@ -35,7 +35,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     /**
      * 添加一些虚拟路径的映射
      * 静态资源路径和上传文件的路径
-     * 如果配置了阿里云上传，则上传路径无效
+     * 如果配置了七牛云上传，则上传路径无效
      *
      * @param registry
      */

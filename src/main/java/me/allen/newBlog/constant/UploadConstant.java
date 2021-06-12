@@ -12,7 +12,7 @@ public interface UploadConstant {
 
     /**
      * 上传方式类型
-     * 本地上传和阿里云服务器上传
+     * 本地/七牛云/七牛云服务器上传
      */
     enum Method {
         /**
@@ -21,9 +21,14 @@ public interface UploadConstant {
         LOCAL,
 
         /**
-         * 阿里云上传
+         * 七牛云上传
          */
-        QINIU;
+        QINIU,
+
+        /**
+         * 阿里云上传
+         **/
+        ALIYUN;
 
         /**
          * 根据name查找Method
@@ -36,7 +41,9 @@ public interface UploadConstant {
                 return LOCAL;
             } else if (name.equalsIgnoreCase(QINIU.name())) {
                 return QINIU;
-            } else {
+            } else if (name.equalsIgnoreCase(ALIYUN.name())) {
+                return ALIYUN;
+            }else {
                 throw new AppRunningException("没有找到匹配的上传接口方法类型！");
             }
         }

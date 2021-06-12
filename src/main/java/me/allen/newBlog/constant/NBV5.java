@@ -95,6 +95,14 @@ public interface NBV5 {
     String QINIU_DOMAIN = "qiniu_domain";
 
     /**
+     * 阿里云相关key值
+     **/
+    String ALIYUN_ACCESS_KEY = "aliyun_accessKey";
+    String ALIYUN_SECRET_KEY = "aliyun_secretKey";
+    String ALIYUN_BUCKET = "aliyun_bucket";
+    String ALIYUN_ENDPOINT = "aliyun_endpoint";
+
+    /**
      * 二维码，赞赏码
      */
     String QRCODE_ALIPAY = "qrcode_alipay";
@@ -105,6 +113,7 @@ public interface NBV5 {
      */
     String STATISTICS_ONOFF = "statistics_onoff";
     String IS_OPEN_OSS_UPLOAD = "is_open_oss_upload";
+    String IS_OPEN_ALIYUNOSS_UPLOAD = "is_open_aliyunoss_upload";
 
 
 }

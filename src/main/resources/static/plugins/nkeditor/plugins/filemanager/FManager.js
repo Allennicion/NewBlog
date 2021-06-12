@@ -104,7 +104,7 @@
 		o.dialog = null;
 		o.selectedList = new Array(); //the file queue upload successfully
 		o.page = 1; //服务器图片列表页码
-		o.marker = null, //阿里云上传的分页标识
+		o.marker = null, //七牛云上传的分页标识
 		o.noRecord = false;
 
 		//close the dialog

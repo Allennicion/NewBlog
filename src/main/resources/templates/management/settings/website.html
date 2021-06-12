@@ -325,11 +325,93 @@
                                 <label class="layui-form-label">阿里云服务</label>
                             </div>
                             <div class="layui-col-xs4 layui-col-sm3">
+                                <input type="checkbox" name="is_open_aliyunoss_upload" lay-skin="switch" lay-text="开启|关闭" disabled
+                                       lay-filter="switchFilter" th:checked="${is_open_aliyunoss_upload eq '1'}">
+                            </div>
+                            <div class="layui-hide-xs layui-hide-sm layui-show-md-inline-block">
+                                <div class="layui-form-mid layui-word-aux">开启则网站用户则上传文件至阿里云<span style="color: red;">(施工中!)</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form">
+
+                        <div id="aliyun-access-key"
+                             th:style="'display:' + @{(${is_open_aliyunoss_upload eq '1'} ? 'block' : 'none')} + ''"
+                             class="layui-form-item">
+                            <div class="layui-row layui-col-space15">
+                                <div class="layui-col-xs4 layui-col-sm3">
+                                    <label class="layui-form-label">AccessKey</label>
+                                </div>
+                                <div class="layui-col-xs7 layui-col-sm8">
+                                    <input type="text" name="aliyun_accessKey" placeholder="请输入AccessKey"
+                                           th:value="${aliyun_accessKey}" autocomplete="off" class="layui-input"></div>
+                            </div>
+                        </div>
+
+                        <div id="aliyun-secret-key"
+                             th:style="'display:' + @{(${is_open_aliyunoss_upload eq '1'} ? 'block' : 'none')} + ''"
+                             class="layui-form-item">
+                            <div class="layui-row layui-col-space15">
+                                <div class="layui-col-xs4 layui-col-sm3">
+                                    <label class="layui-form-label">SecretKey</label>
+                                </div>
+                                <div class="layui-col-xs7 layui-col-sm8">
+                                    <input type="text" name="aliyun_secretKey" placeholder="请输入SecretKey"
+                                           th:value="${aliyun_secretKey}" autocomplete="off" class="layui-input"></div>
+                            </div>
+                        </div>
+
+                        <div id="aliyun-bucket"
+                             th:style="'display:' + @{(${is_open_aliyunoss_upload eq '1'} ? 'block' : 'none')} + ''"
+                             class="layui-form-item">
+                            <div class="layui-row layui-col-space15">
+                                <div class="layui-col-xs4 layui-col-sm3">
+                                    <label class="layui-form-label">bucket</label>
+                                </div>
+                                <div class="layui-col-xs7 layui-col-sm8">
+                                    <input type="text" name="aliyun_bucket" placeholder="请输入bucket"
+                                           th:value="${aliyun_bucket}" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="aliyun-endpoint"
+                             th:style="'display:' + @{(${is_open_aliyunoss_upload eq '1'} ? 'block' : 'none')} + ''"
+                             class="layui-form-item">
+                            <div class="layui-row layui-col-space15">
+                                <div class="layui-col-xs4 layui-col-sm3">
+                                    <label class="layui-form-label">阿里域名</label>
+                                </div>
+                                <div class="layui-col-xs7 layui-col-sm8">
+                                    <input type="text" name="aliyun-endpoint" placeholder="请输入访问域名，以http或https开头"
+                                           th:value="${aliyun_endpoint}" autocomplete="off" class="layui-input"></div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item" id="aliyunSubmit"
+                             th:style="'display:' + @{(${is_open_aliyunoss_upload eq '1'} ? 'block' : 'none')} + ''">
+                            <div class="layui-row">
+                                <div class="layui-col-xs7 layui-col-sm8 layui-col-xs-offset4 layui-col-sm-offset3">
+                                    <button class="layui-btn layui-btn-fluid layui-btn-sm" lay-submit
+                                            lay-filter="settingsAliyunBatch">提交
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-form">
+                        <div class="layui-row layui-col-space15">
+                            <div class="layui-col-xs4 layui-col-sm3">
+                                <label class="layui-form-label">七牛云服务</label>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm3">
                                 <input type="checkbox" name="is_open_oss_upload" lay-skin="switch" lay-text="开启|关闭"
                                        lay-filter="switchFilter" th:checked="${is_open_oss_upload eq '1'}">
                             </div>
                             <div class="layui-hide-xs layui-hide-sm layui-show-md-inline-block">
-                                <div class="layui-form-mid layui-word-aux">开启则网站用户则上传文件至阿里云</div>
+                                <div class="layui-form-mid layui-word-aux">开启则网站用户则上传文件至七牛云</div>
                             </div>
                         </div>
                     </div>

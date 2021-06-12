@@ -113,6 +113,7 @@ public class UserController extends BaseController {
             mailService.sendMailCode(email);
             return ResultBeanObj.ok("发送成功，请在您的邮箱中查收！");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResultBeanObj.error("发送验证码发生错误，错误信息：" + e.getMessage());
         }
     }

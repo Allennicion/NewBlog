@@ -178,7 +178,7 @@
 		o.totalFilesize = 0; //total file size
 		o.uploadLock = false; //upload thread lock
 		o.page = 1; //服务器图片列表页码
-		o.marker = null, //阿里云上传的分页标识
+		o.marker = null, //七牛云上传的分页标识
 		o.searchPage = 1; //图片搜索页码
 		o.searchText = null; //搜索文字
 		o.noRecord = false;

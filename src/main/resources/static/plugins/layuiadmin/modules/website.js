@@ -35,6 +35,12 @@ layui.define(['element', 'form', 'upload'], function (exports) {
                     $("#qiniu-domain").css("display", data.elem.checked ? 'block' : 'none');
                     $("#qiniu-secret-key").css("display", data.elem.checked ? 'block' : 'none');
                     $("#qiNiuSubmit").css("display", data.elem.checked ? 'block' : 'none');
+                } else if (name === 'is_open_aliyunoss_upload') {
+                    $("#aliyun-access-key").css("display", data.elem.checked ? 'block' : 'none');
+                    $("#aliyun-bucket").css("display", data.elem.checked ? 'block' : 'none');
+                    $("#aliyun-endpoint").css("display", data.elem.checked ? 'block' : 'none');
+                    $("#aliyun-secret-key").css("display", data.elem.checked ? 'block' : 'none');
+                    $("#aliyunSubmit").css("display", data.elem.checked ? 'block' : 'none');
                 }
             }
         })
@@ -73,7 +79,6 @@ layui.define(['element', 'form', 'upload'], function (exports) {
     });
 
     form.on('submit(settingsTextarea)', function (data) {
-        debugger
         var $this = $(data.elem);
         var $data = $this.parents("div.layui-card").find("textarea");
         var name = $data.attr("name");
@@ -88,6 +93,21 @@ layui.define(['element', 'form', 'upload'], function (exports) {
     });
 
     form.on('submit(settingsBatch)', function (data) {
+        delete data.field.file;
+        var dataArr = data.field;
+        var arr = [];
+        for (var d in dataArr) {
+            arr.push({"name": d, "value": dataArr[d]});
+        }
+        NBV5.post("/management/settings/updateBatch", {
+            params: JSON.stringify(arr)
+        }, function (resp) {
+            layer.msg(resp.message);
+        });
+        return false;
+    });
+
+    form.on('submit(settingsAliyunBatch)', function (data) {
         delete data.field.file;
         var dataArr = data.field;
         var arr = [];

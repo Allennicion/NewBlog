@@ -101,7 +101,7 @@ layui.use('form', function () {
         }, function () {
             if (obj.upload_type === 'QINIU') {
                 if (obj.qiniu_accessKey === '' || obj.qiniu_secretKey === '' || obj.qiniu_bucket === '' || obj.qiniu_domain === '') {
-                    layer.alert('请正确填写阿里云的相关数据！');
+                    layer.alert('请正确填写七牛云的相关数据！');
                     return false;
                 }
             }

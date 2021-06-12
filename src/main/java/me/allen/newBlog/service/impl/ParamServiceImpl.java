@@ -113,6 +113,11 @@ public class ParamServiceImpl extends ServiceImpl<ParamMapper, Param> implements
             final String type = "0".equalsIgnoreCase(value) ? UploadConstant.Method.LOCAL.name() : UploadConstant.Method.QINIU.name();
             paramMapper.updateValueByName(NBV5.UPLOAD_TYPE, type);
         }
+        if (name.equalsIgnoreCase(NBV5.IS_OPEN_ALIYUNOSS_UPLOAD)) {
+            CacheUtils.removeParamCache(NBV5.UPLOAD_TYPE);
+            final String type = "0".equalsIgnoreCase(value) ? UploadConstant.Method.LOCAL.name() : UploadConstant.Method.ALIYUN.name();
+            paramMapper.updateValueByName(NBV5.UPLOAD_TYPE, type);
+        }
         if (name.equalsIgnoreCase(NBV5.COMMENT_MAIL_NOTICE_ONOFF)
                 || name.equalsIgnoreCase(NBV5.MESSAGE_MAIL_NOTICE_ONOFF)
                 || name.equalsIgnoreCase(NBV5.USER_SIMPLE_REG_ONOFF)) {

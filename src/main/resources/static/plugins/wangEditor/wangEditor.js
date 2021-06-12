@@ -716,7 +716,7 @@ var config = {
         }
     },
 
-    // 是否上传阿里云，默认为 false
+    // 是否上传七牛云，默认为 false
     qiniu: false
 
 };

@@ -297,7 +297,7 @@ public class NbUtils implements ApplicationContextAware, ServletContextListener 
     }
 
     /**
-     * 根据设定的上传方式（本地服务器上传还是阿里云上传）来匹配相应的service实例
+     * 根据设定的上传方式（本地服务器上传还是七牛云上传）来匹配相应的service实例
      *
      * @param <T>
      * @return
@@ -305,7 +305,7 @@ public class NbUtils implements ApplicationContextAware, ServletContextListener 
     @SuppressWarnings("unchecked")
     public static <T> UploadService<T> getUploadServiceByConfig() {
         final String name = NBV5.UPLOAD_TYPE;
-        final String local = "local", qiniu = "qiniu";
+        final String local = "local", qiniu = "qiniu", aliyun = "aliyun";
         String config = applicationContext.getBean(ParamService.class).getOne(Wrappers.<Param>query().eq("name", name)).getValue();
         if (config != null) {
             UploadConstant.Method method = UploadConstant.Method.getMethodByName(config);
@@ -313,7 +313,9 @@ public class NbUtils implements ApplicationContextAware, ServletContextListener 
                 return applicationContext.getBean("localUpload", UploadService.class);
             } else if (qiniu.equalsIgnoreCase(method.name())) {
                 return applicationContext.getBean("qiniuUpload", UploadService.class);
-            } else {
+            } else if (aliyun.equalsIgnoreCase(method.name())) {
+                return applicationContext.getBean("aliyunUpload", UploadService.class);
+            }else {
                 throw new AppRunningException("未找到相应的上传类型的Service实例！");
             }
         }
