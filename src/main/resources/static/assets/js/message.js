@@ -114,7 +114,7 @@ layui.define(['laytpl', 'timeago', 'laypage'], function (exports) {
         '<div class="layui-card" id="info-panel">' +
         '<div class="layui-card-body text-center" style="padding: 20px;">' +
         '<a class="no-hover" href="/login" target="_blank"><img src="{{d.settings.info_label_logo}}" class="layui-circle" style="max-width: 150px;" alt="{{d.settings.info_label_nickname}}"></a>' +
-        '<p class="layui-text nbv5-font" style="margin: 10px;color: #F44336;">Master：<b>{{d.settings.info_label_nickname}}</b></p>' +
+        //'<p class="layui-text nbv5-font" style="margin: 10px;color: #F44336;">Master：<b>{{d.settings.info_label_nickname}}</b></p>' +
         '<hr>' +
         '{{# if(d.nbv5su != null){}}' +
         '<p>当前登录: <a href="/login?redirectUrl=/ubs/token/index" class="no-hover"><img src="{{d.nbv5su.avatar}}" style="width: 30px;height: 30px;" class="layui-circle"></a>' +
