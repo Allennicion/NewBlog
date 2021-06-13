@@ -115,5 +115,5 @@ public interface NBV5 {
     String IS_OPEN_OSS_UPLOAD = "is_open_oss_upload";
     String IS_OPEN_ALIYUNOSS_UPLOAD = "is_open_aliyunoss_upload";
 
-
+    String IP_BLACKLIST = "ip_blacklist";
 }
