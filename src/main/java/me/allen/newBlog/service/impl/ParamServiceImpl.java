@@ -19,7 +19,6 @@ import me.allen.newBlog.model.entity.User;
 import me.allen.newBlog.model.entity.UserCoinRecord;
 import me.allen.newBlog.service.ParamService;
 import me.allen.newBlog.utils.CacheUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,13 +38,15 @@ import java.util.Map;
 @Transactional(rollbackFor = Exception.class)
 public class ParamServiceImpl extends ServiceImpl<ParamMapper, Param> implements ParamService {
 
-    @Autowired
-    private ParamMapper paramMapper;
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private UserCoinRecordMapper userCoinRecordMapper;
+    private final ParamMapper paramMapper;
+    private final UserMapper userMapper;
+    private final UserCoinRecordMapper userCoinRecordMapper;
 
+    public ParamServiceImpl(ParamMapper paramMapper, UserMapper userMapper, UserCoinRecordMapper userCoinRecordMapper) {
+        this.paramMapper = paramMapper;
+        this.userMapper = userMapper;
+        this.userCoinRecordMapper = userCoinRecordMapper;
+    }
 
     @Override
     public void saveInitParam(Map<String, Object> map) {
