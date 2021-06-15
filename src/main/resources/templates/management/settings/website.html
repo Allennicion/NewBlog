@@ -732,6 +732,19 @@
             </div>
 
             <div class="layui-card layui-form">
+                <div class="layui-card-header">IP黑名单</div>
+                <div class="layui-card-body">
+                       <textarea name="ip_blacklist" placeholder="IP黑名单,多个ip使用逗号分割!"
+                                 class="layui-textarea" th:utext="${ip_blacklist}"
+                                 style="height: 250px;"></textarea>
+                    <p style="margin-top: 10px;">
+                        <button class="layui-btn-sm layui-btn layui-btn-fluid" lay-submit lay-filter="settingsIpBlacks">提交
+                        </button>
+                    </p>
+                </div>
+            </div>
+
+            <div class="layui-card layui-form">
                 <div class="layui-card-header">首页排版设置</div>
                 <div class="layui-card-body">
                     <blockquote class="layui-elem-quote">说明：页面总共分为12列</blockquote>

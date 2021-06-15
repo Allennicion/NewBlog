@@ -152,6 +152,20 @@ layui.define(['element', 'form', 'upload'], function (exports) {
         })
     });
 
+    form.on('submit(settingsIpBlacks)', function (data) {
+        var $this = $(data.elem);
+        var $data = $this.parents("div.layui-card").find("textarea");
+        var name = $data.attr("name");
+        var value = $data.val();
+        NBV5.post("/management/settings/update", {
+            name: name,
+            value: value
+        }, function (json) {
+            NBV5.okMsgHandle(json);
+        });
+        return false;
+    });
+
     upload.render({
         elem: '#logo-avatar' //绑定元素
         , url: '/management/upload' //上传接口
