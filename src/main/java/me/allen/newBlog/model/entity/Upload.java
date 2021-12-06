@@ -1,5 +1,7 @@
 package me.allen.newBlog.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Builder;
 import lombok.Data;
 import me.allen.newBlog.enums.ObjectKeyEnum;
@@ -16,12 +18,13 @@ import java.util.Date;
 @Builder
 public class Upload implements Serializable {
 
-    private Long id;
+    @TableId(type = IdType.UUID)
+    private String id;
     private String diskPath;
     private String virtualPath;
     private Date upload;
     private String type;
-    private Long userId;
+    private String userId;
     /**
      * 上传标识，标识是从哪个功能和模块部分上传的
      * 如：添加文章编辑器、文章封面上传等。

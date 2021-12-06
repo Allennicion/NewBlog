@@ -43,7 +43,7 @@ public class AdminDownloadController extends BaseController {
 
     @GetMapping("/add")
     public String addDownloadPage(Model model) {
-        model.addAttribute("downloadCateList", dictService.list(Wrappers.<Dict>query().eq("`group`", DictGroup.GROUP_DOWNLOAD_CATE)));
+        model.addAttribute("downloadCateList", dictService.list(Wrappers.<Dict>query().eq("dict_group", DictGroup.GROUP_DOWNLOAD_CATE)));
         return "management/download/add";
     }
 
@@ -56,7 +56,7 @@ public class AdminDownloadController extends BaseController {
     public String editDownloadPage(Model model, String id) {
         Download download = downloadService.getById(id);
         model.addAttribute("editDownload", download);
-        model.addAttribute("downloadCateList", dictService.list(Wrappers.<Dict>query().eq("`group`", DictGroup.GROUP_DOWNLOAD_CATE)));
+        model.addAttribute("downloadCateList", dictService.list(Wrappers.<Dict>query().eq("dict_group", DictGroup.GROUP_DOWNLOAD_CATE)));
         model.addAttribute("downloads", dictService.findCatesByDownloadId(id));
         return "management/download/edit";
     }

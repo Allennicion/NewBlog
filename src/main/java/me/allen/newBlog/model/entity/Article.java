@@ -23,13 +23,13 @@ import static cn.hutool.core.util.RandomUtil.randomInt;
 @AllArgsConstructor
 public class Article implements Serializable {
 
-    @TableId(type = IdType.INPUT)
+    @TableId(type = IdType.UUID)
     private String id;
     @Builder.Default
     private Boolean appreciable = Boolean.FALSE;
     @Builder.Default
     private Integer approveCnt = randomInt(6, 169);
-    private Long authorId;
+    private String authorId;
     @Builder.Default
     private Boolean commented = Boolean.FALSE;
     @Builder.Default
@@ -40,16 +40,13 @@ public class Article implements Serializable {
     @Builder.Default
     private Boolean draft = Boolean.TRUE;
     private String mdContent;
-    @TableField("`post`")
     private Date post;
-    @TableField("`modify`")
-    private Date modify;
+    private Date modifyTime;
     private String summary;
     private String textContent;
     @NotEmpty(message = "文章标题不能为空")
     private String title;
     @Builder.Default
-    @TableField("`top`")
     private Integer top = 0;
     private String urlSeq;
     @Builder.Default

@@ -17,18 +17,18 @@ import java.util.Date;
 @Builder
 public class Download implements Serializable {
 
-    @TableId(type = IdType.INPUT)
+    @TableId(type = IdType.UUID)
     private String id;
     @NotEmpty(message = "标题不能为空")
     private String title;
-    @TableField("`top`")
+    @TableField("top")
     private Integer top;
     private String downloadKey;
     private Date createTime;
     private Date updateTime;
     @NotEmpty(message = "下载链接不能为空")
     private String downloadUrl;
-    private Long createUserId;
+    private String createUserId;
     private String createUsername;
     private String createNickname;
 

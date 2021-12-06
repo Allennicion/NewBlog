@@ -52,7 +52,7 @@ public class AdminProductController extends BaseController {
 
     @GetMapping("/add")
     public String publishProductPage(HttpServletRequest request) {
-        List<Dict> productDicts = dictService.list(Wrappers.<Dict>query().eq("`group`", DictGroup.GROUP_ARTICLE_CATE));
+        List<Dict> productDicts = dictService.list(Wrappers.<Dict>query().eq("dict_group", DictGroup.GROUP_ARTICLE_CATE));
         List<Dict> productDicts2 = productDicts.stream().filter(dict -> !dict.getName().equals(Dict.PRODUCT)).collect(Collectors.toList());
         request.setAttribute("cateList", productDicts2);
         request.setAttribute("generateNextArticleId", IdUtil.objectId());
@@ -63,7 +63,7 @@ public class AdminProductController extends BaseController {
     public String edit(Model model, String id, HttpServletRequest request) {
         Article article = articleService.getById(id);
         articleService.handleShowArticle(article, getSessionUser(request));
-        List<Dict> productDicts = dictService.list(Wrappers.<Dict>query().eq("`group`", DictGroup.GROUP_ARTICLE_CATE));
+        List<Dict> productDicts = dictService.list(Wrappers.<Dict>query().eq("dict_group", DictGroup.GROUP_ARTICLE_CATE));
         List<Dict> productDicts2 = productDicts.stream().filter(dict -> !dict.getName().equals(Dict.PRODUCT)).collect(Collectors.toList());
         model.addAttribute("cateList", productDicts2);
         model.addAttribute("editArticle", article);
@@ -94,7 +94,7 @@ public class AdminProductController extends BaseController {
     @PostMapping("/create")
     @ResponseBody
     public ResultBeanObj productCreate(@Valid Article article, BindingResult result, HttpServletRequest request,
-                                       @RequestParam(required = false, value = "cateIds[]") List<Integer> cateIds,
+                                       @RequestParam(required = false, value = "cateIds[]") List<String> cateIds,
                                        @RequestParam(required = false, value = "tagNames[]") List<String> tagNames) {
         String generateNextArticleId = request.getParameter("generateNextArticleId");
         if (StringUtils.isEmpty(generateNextArticleId)) {
@@ -112,7 +112,7 @@ public class AdminProductController extends BaseController {
             if (cateIds == null) {
                 cateIds = new ArrayList<>();
             }
-            cateIds.add(dict.getId().intValue());
+            cateIds.add(dict.getId());
             if (cateIds.size() > 3) {
                 return ResultBeanObj.error("分类选择最多不能超过3个！");
             }
@@ -148,15 +148,15 @@ public class AdminProductController extends BaseController {
     @PostMapping("/update")
     @ResponseBody
     public ResultBeanObj productUpdate(@Valid Article article, BindingResult result, HttpServletRequest request,
-                                       @RequestParam(required = false, value = "cateIds[]") List<Integer> cateIds,
+                                       @RequestParam(required = false, value = "cateIds[]") List<String> cateIds,
                                        @RequestParam(required = false, value = "tagNames[]") List<String> tagNames) {
         if (result.getErrorCount() == 0) {
             Dict dict = dictService.findProductDict();
             if (cateIds == null) {
                 cateIds = new ArrayList<>();
             }
-            cateIds.removeIf(cateId -> cateId == dict.getId().intValue());
-            cateIds.add(dict.getId().intValue());
+            cateIds.removeIf(cateId -> cateId == dict.getId());
+            cateIds.add(dict.getId());
             if (cateIds.size() > 3) {
                 return ResultBeanObj.error("分类选择最多不能超过3个！");
             }

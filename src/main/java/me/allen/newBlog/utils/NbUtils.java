@@ -486,7 +486,7 @@ public class NbUtils implements ApplicationContextAware, ServletContextListener 
     public static void deleteUploadTempWhenArticleNotSave() {
         UserService userService = NbUtils.getBean(UserService.class);
         List<User> users = userService.list(Wrappers.<User>query().eq("role", RoleEnum.ADMIN.getValue()));
-        List<Long> userIds = new ArrayList<>(users.size());
+        List<String> userIds = new ArrayList<>(users.size());
         for (User user : users) {
             userIds.add(user.getId());
         }

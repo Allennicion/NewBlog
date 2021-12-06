@@ -7,7 +7,7 @@
 
     <update id="updateValueByName">
         update nb_param
-        set `value` = #{value}
-        where `name` = #{name}
+        set value = #{value}
+        where name = #{name}
     </update>
 </mapper>

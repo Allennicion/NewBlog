@@ -72,23 +72,23 @@ public class CommentController extends BaseController {
                     comment.setIpInfo("本地/未知");
                 }
                 comment.setUserAgent(request.getHeader("user-agent"));
-                comment.setComment(
-                        HtmlUtil.removeHtmlTag(NbUtils.stripSqlXss(comment.getComment()),
+                comment.setComments(
+                        HtmlUtil.removeHtmlTag(NbUtils.stripSqlXss(comment.getComments()),
                                 false, "style", "link", "meta", "script"));
-                comment.setComment(EmojiParser.parseToHtmlDecimal(comment.getComment()));
+                comment.setComments(EmojiParser.parseToHtmlDecimal(comment.getComments()));
                 comment.setPost(LocalDateTime.now());
-                comment.setClearComment(HtmlUtil.cleanHtmlTag(comment.getComment()));
+                comment.setClearComment(HtmlUtil.cleanHtmlTag(comment.getComments()));
                 int floor = commentService.findMaxFloorByArticleId(comment.getArticleId());
                 comment.setFloor(floor);
                 List<Dict> keywords = dictService.findList(DictGroup.GROUP_KEYWORD);
                 keywords.forEach(
-                        kw -> comment.setComment(comment.getComment().replace(kw.getName(), StrUtil.repeat("*", kw.getName().length()))));
-                if (StringUtils.isEmpty(comment.getComment())) {
+                        kw -> comment.setComments(comment.getComments().replace(kw.getName(), StrUtil.repeat("*", kw.getName().length()))));
+                if (StringUtils.isEmpty(comment.getComments())) {
                     return ResultBeanObj.error("评论正确填写评论内容！");
                 }
                 if (commentService.save(comment)) {
                     if ("1".equals(paramService.findByName(NBV5.COMMENT_MAIL_NOTICE_ONOFF).getValue())) {
-                        mailService.sendNoticeMail(basePath(request), articleService.getById(comment.getArticleId()), comment.getComment());
+                        mailService.sendNoticeMail(basePath(request), articleService.getById(comment.getArticleId()), comment.getComments());
                     }
                     CacheUtils.removeDefaultCache("commentCount");
                     return ResultBeanObj.ok("发表评论成功");

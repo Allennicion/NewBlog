@@ -1,6 +1,8 @@
 package me.allen.newBlog.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +26,8 @@ import static java.lang.Boolean.TRUE;
 @NoArgsConstructor
 public class Note implements Serializable {
 
-    private Long id;
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
     @NotEmpty
     private String title;
     private String clearContent;
@@ -32,14 +35,10 @@ public class Note implements Serializable {
     @NotEmpty
     private String content;
     @Builder.Default
-    @TableField("`top`")
     private Boolean top = FALSE;
     @Builder.Default
-    @TableField("`show`")
     private Boolean show = TRUE;
     @Builder.Default
-    @TableField("`post`")
     private Date post = new Date();
-    @TableField("`modify`")
-    private Date modify;
+    private Date modifyTime;
 }

@@ -16,7 +16,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Hide implements Serializable {
 
-    @TableId(type = IdType.INPUT)
+    @TableId(type = IdType.UUID)
     private String id;
     private String articleId;
     private String hideType;
