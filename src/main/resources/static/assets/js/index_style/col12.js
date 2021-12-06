@@ -62,7 +62,7 @@ layui.define(['laytpl', 'laypage'], function (exports) {
         '           {{# if(d.articleCommentCountMap[item.id] == 0){ }}' +
         '           <span class="layui-mr15"><i class="fa fa-user-o"></i> 用户：<span>{{ d.articleAuthors[item.id] }}</span></span>' +
         '           {{# } }}' +
-        '           <span class="layui-mr15"><i class="fa fa-calendar"></i> 更新：<span class="detail-date">{{ nbv5front.wholeCnDate(item.modify) }}</span><span class="simple-date">{{ nbv5front.simpleDate(item.modify) }}</span></span>' +
+        '           <span class="layui-mr15"><i class="fa fa-calendar"></i> 更新：<span class="detail-date">{{ nbv5front.wholeCnDate(item.modifyTime) }}</span><span class="simple-date">{{ nbv5front.simpleDate(item.modifyTime) }}</span></span>' +
         '       </p>' +
         '   </div>' +
         '</div>' +

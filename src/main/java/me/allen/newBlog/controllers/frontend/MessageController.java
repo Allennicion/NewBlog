@@ -90,17 +90,17 @@ public class MessageController extends BaseController {
                     message.setIpInfo("本地/未知");
                 }
                 message.setUserAgent(request.getHeader("user-agent"));
-                message.setComment(
-                        HtmlUtil.removeHtmlTag(NbUtils.stripSqlXss(message.getComment()),
+                message.setComments(
+                        HtmlUtil.removeHtmlTag(NbUtils.stripSqlXss(message.getComments()),
                                 false, "style", "link", "meta", "script"));
                 message.setPost(LocalDateTime.now());
-                message.setClearComment(HtmlUtil.cleanHtmlTag(message.getComment()));
+                message.setClearComment(HtmlUtil.cleanHtmlTag(message.getComments()));
                 List<Dict> keywords = dictService.findList(DictGroup.GROUP_KEYWORD);
                 keywords.forEach(
-                        kw -> message.setComment(message.getComment().replace(kw.getName(), StrUtil.repeat("*", kw.getName().length()))));
+                        kw -> message.setComments(message.getComments().replace(kw.getName(), StrUtil.repeat("*", kw.getName().length()))));
                 if (messageService.save(message)) {
                     if ("1".equals(paramService.findByName(NBV5.MESSAGE_MAIL_NOTICE_ONOFF).getValue())) {
-                        mailService.sendMessageMail(basePath(request), message.getComment());
+                        mailService.sendMessageMail(basePath(request), message.getComments());
                     }
                     return ResultBeanObj.ok("发表评论成功");
                 } else {

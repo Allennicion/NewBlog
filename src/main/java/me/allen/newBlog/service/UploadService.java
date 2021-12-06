@@ -62,7 +62,7 @@ public interface UploadService<T> extends IService<Upload> {
      * @return
      * @throws IOException
      */
-    default Upload baseUpload(Long sessionUserId, MultipartFile fileObj, Map<Object, Object> paramMap) throws IOException {
+    default Upload baseUpload(String sessionUserId, MultipartFile fileObj, Map<Object, Object> paramMap) throws IOException {
         String uploadPathPre = Objects.requireNonNull(fileObj.getContentType()).contains("image/") ? UploadConstant.FileType.IMAGE : UploadConstant.FileType.FILE;
         String fileName = fileObj.getOriginalFilename();
         //扩展名，包括点符号
@@ -116,6 +116,6 @@ public interface UploadService<T> extends IService<Upload> {
      * @param paramMap      上传之外的额外参数
      * @return upload 的上传json
      */
-    T doUpload(Long sessionUserId, MultipartFile fileObj, String reqType, Map<Object, Object> paramMap);
+    T doUpload(String sessionUserId, MultipartFile fileObj, String reqType, Map<Object, Object> paramMap);
 
 }

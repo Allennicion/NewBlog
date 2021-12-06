@@ -42,7 +42,7 @@ public class LocalUploadServiceImpl extends ServiceImpl<UploadMapper, Upload> im
     }
 
     @Override
-    public Object doUpload(Long sessionUserId, MultipartFile fileObj, String reqType, Map<Object, Object> paramMap) {
+    public Object doUpload(String sessionUserId, MultipartFile fileObj, String reqType, Map<Object, Object> paramMap) {
         try {
             Upload upload = baseUpload(sessionUserId, fileObj, paramMap);
             uploadMapper.insert(upload);

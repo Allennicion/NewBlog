@@ -52,7 +52,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
     @Override
     public List<Dict> findCatesByArticleId(String articleId) {
-        String sql = "select * from nb_dict where `group` = ? and id in (select cate_id from refer_article_cate where article_id = ?)";
+        String sql = "select * from nb_dict where dict_group = ? and id in (select cate_id from refer_article_cate where article_id = ?)";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Dict.class), DictGroup.GROUP_ARTICLE_CATE, articleId);
     }
 
@@ -64,7 +64,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
      */
     @Override
     public List<Dict> findCatesByDownloadId(String downloadId) {
-        String sql = "select * from nb_dict where `group` = ? and id in (select cate_id from refer_download_cate where download_id = ?)";
+        String sql = "select * from nb_dict where dict_group = ? and id in (select cate_id from refer_download_cate where download_id = ?)";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Dict.class), DictGroup.GROUP_DOWNLOAD_CATE, downloadId);
     }
 
@@ -77,13 +77,13 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
     @Override
     public List<Dict> findTagsByArticleId(String articleId) {
-        String sql = "select * from nb_dict where `group`=? and  id in (select tag_id from refer_article_tag where article_id = ?)";
+        String sql = "select * from nb_dict where dict_group=? and  id in (select tag_id from refer_article_tag where article_id = ?)";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Dict.class), DictGroup.GROUP_TAG, articleId);
     }
 
     @Override
     public List<Dict> findList(String groupName) {
-        return this.list(Wrappers.<Dict>query().eq("`group`", groupName));
+        return this.list(Wrappers.<Dict>query().eq("dict_group", groupName));
     }
 
     @Override
@@ -103,7 +103,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     public Dict findProductDict() {
         Dict product = dictMapper.findProductDict();
         if (product == null) {
-            product = Dict.builder().group(DictGroup.GROUP_ARTICLE_CATE).name(Dict.PRODUCT).build();
+            product = Dict.builder().dictGroup(DictGroup.GROUP_ARTICLE_CATE).name(Dict.PRODUCT).build();
             dictMapper.insert(product);
         }
         return product;

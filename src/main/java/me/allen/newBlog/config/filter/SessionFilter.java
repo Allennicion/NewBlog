@@ -46,7 +46,7 @@ public class SessionFilter extends BaseController implements HandlerInterceptor 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv) throws Exception {
         String username = "";
-        Long userId = null;
+        String userId = null;
         if (mv != null) {
             User user = getSessionUser(request);
             if (user == null) {

@@ -40,17 +40,17 @@ public class AdminDictController extends BaseController {
     public String cateTagPage(String cateName, String tagName,String downloadCateName) {
         request.setAttribute("cateList",
                 dictService.list(Wrappers.<Dict>query()
-                        .eq("`group`", DictGroup.GROUP_ARTICLE_CATE)
+                        .eq("dict_group", DictGroup.GROUP_ARTICLE_CATE)
                         .like(StrUtil.isNotEmpty(cateName), "name", cateName)));
         request.setAttribute("searchCate", cateName);
         request.setAttribute("tagList",
                 dictService.list(Wrappers.<Dict>query()
-                        .eq("`group`", DictGroup.GROUP_TAG)
+                        .eq("dict_group", DictGroup.GROUP_TAG)
                         .like(StrUtil.isNotEmpty(tagName), "name", tagName)));
         request.setAttribute("searchTag", tagName);
         request.setAttribute("downloadCateList",
                 dictService.list(Wrappers.<Dict>query()
-                        .eq("`group`", DictGroup.GROUP_DOWNLOAD_CATE)
+                        .eq("dict_group", DictGroup.GROUP_DOWNLOAD_CATE)
                         .like(StrUtil.isNotEmpty(downloadCateName), "name", downloadCateName)));
         request.setAttribute("searchDownloadCateName", downloadCateName);
         return "management/dict/cates_tags";
@@ -60,7 +60,7 @@ public class AdminDictController extends BaseController {
     public String keywordPage(String keyword) {
         request.setAttribute("keywords",
                 dictService.list(Wrappers.<Dict>query()
-                        .eq("`group`", DictGroup.GROUP_KEYWORD)
+                        .eq("dict_group", DictGroup.GROUP_KEYWORD)
                         .like(StrUtil.isNotEmpty(keyword), "name", keyword)));
         request.setAttribute("searchKeyword", keyword);
         return "management/dict/keyword";
@@ -70,7 +70,7 @@ public class AdminDictController extends BaseController {
     public String linkPage(String name) {
         request.setAttribute("links",
                 dictService.list(Wrappers.<Dict>query()
-                        .eq("`group`", DictGroup.GROUP_LINK)
+                        .eq("dict_group", DictGroup.GROUP_LINK)
                         .like(StrUtil.isNotEmpty(name), "name", StrUtil.format("{},", name))));
         request.setAttribute("searchLinkName", name);
         return "management/dict/link";
@@ -111,9 +111,9 @@ public class AdminDictController extends BaseController {
     @PostMapping("/cate/add")
     @ResponseBody
     public ResultBeanObj addCate(String cateName) {
-        Dict c = dictService.getOne(Wrappers.<Dict>query().eq("`group`", DictGroup.GROUP_ARTICLE_CATE).eq("name", cateName));
+        Dict c = dictService.getOne(Wrappers.<Dict>query().eq("dict_group", DictGroup.GROUP_ARTICLE_CATE).eq("name", cateName));
         if (c == null) {
-            boolean res = dictService.save(Dict.builder().name(cateName).group(DictGroup.GROUP_ARTICLE_CATE).build());
+            boolean res = dictService.save(Dict.builder().name(cateName).dictGroup(DictGroup.GROUP_ARTICLE_CATE).build());
             if (res) {
                 CacheUtils.removeDefaultCache("cateGroupList");
             }
@@ -126,9 +126,9 @@ public class AdminDictController extends BaseController {
     @PostMapping("/downloadCate/add")
     @ResponseBody
     public ResultBeanObj addDownloadCate(String downloadCateName) {
-        Dict c = dictService.getOne(Wrappers.<Dict>query().eq("`group`", DictGroup.GROUP_DOWNLOAD_CATE).eq("name", downloadCateName));
+        Dict c = dictService.getOne(Wrappers.<Dict>query().eq("dict_group", DictGroup.GROUP_DOWNLOAD_CATE).eq("name", downloadCateName));
         if (c == null) {
-            boolean res = dictService.save(Dict.builder().name(downloadCateName).group(DictGroup.GROUP_DOWNLOAD_CATE).build());
+            boolean res = dictService.save(Dict.builder().name(downloadCateName).dictGroup(DictGroup.GROUP_DOWNLOAD_CATE).build());
             return handle(res, "添加成功！", "添加失败！");
         } else {
             return ResultBeanObj.error("已经有此下载分类，不能重复添加！");
@@ -139,9 +139,9 @@ public class AdminDictController extends BaseController {
     @PostMapping("/tag/add")
     @ResponseBody
     public ResultBeanObj addTag(String tagName) {
-        Dict t = dictService.getOne(Wrappers.<Dict>query().eq("`group`", DictGroup.GROUP_TAG).eq("name", tagName));
+        Dict t = dictService.getOne(Wrappers.<Dict>query().eq("dict_group", DictGroup.GROUP_TAG).eq("name", tagName));
         if (t == null) {
-            boolean res = dictService.save(Dict.builder().name(tagName).group(DictGroup.GROUP_TAG).build());
+            boolean res = dictService.save(Dict.builder().name(tagName).dictGroup(DictGroup.GROUP_TAG).build());
             if (res) {
                 CacheUtils.removeDefaultCache("cateGroupList");
             }
@@ -154,9 +154,9 @@ public class AdminDictController extends BaseController {
     @PostMapping("/keyword/add")
     @ResponseBody
     public ResultBeanObj addKeyword(String keyword) {
-        Dict t = dictService.getOne(Wrappers.<Dict>query().eq("`group`", DictGroup.GROUP_KEYWORD).eq("name", keyword));
+        Dict t = dictService.getOne(Wrappers.<Dict>query().eq("dict_group", DictGroup.GROUP_KEYWORD).eq("name", keyword));
         if (t == null) {
-            boolean res = dictService.save(Dict.builder().name(keyword).group(DictGroup.GROUP_KEYWORD).build());
+            boolean res = dictService.save(Dict.builder().name(keyword).dictGroup(DictGroup.GROUP_KEYWORD).build());
             return handle(res, "添加成功！", "添加失败！");
         } else {
             return ResultBeanObj.error("已经有此关键字，不能重复添加！");
@@ -167,11 +167,11 @@ public class AdminDictController extends BaseController {
     @ResponseBody
     public ResultBeanObj addLink(String linkName, String linkHref) {
         Dict t = dictService.getOne(Wrappers.<Dict>query()
-                .eq("`group`", DictGroup.GROUP_LINK)
+                .eq("dict_group", DictGroup.GROUP_LINK)
                 .likeRight("name", StrUtil.format("{},", linkName)));
         if (t == null) {
             boolean res = dictService.save(
-                    Dict.builder().name(StrUtil.format("{}，{}", linkName, linkHref)).group(DictGroup.GROUP_LINK).build());
+                    Dict.builder().name(StrUtil.format("{}，{}", linkName, linkHref)).dictGroup(DictGroup.GROUP_LINK).build());
             return handle(res, "添加成功！", "添加失败！");
         } else {
             return ResultBeanObj.error("已存在，请检查是否重复添加！");

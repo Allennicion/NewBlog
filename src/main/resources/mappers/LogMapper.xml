@@ -5,22 +5,24 @@
 <mapper namespace="me.allen.newBlog.mapper.LogMapper">
 
     <select id="ipSummary" resultType="me.allen.newBlog.model.bo.EchartsBo">
-        SELECT ip_info AS name, COUNT(*) AS value
-        FROM nb_log
-        WHERE ip_info != '未知'
-          AND ip_info != ''
-        GROUP BY ip_info
-        LIMIT 10
+        select name, value from (
+            SELECT ip_info AS name, COUNT(*) AS value
+            FROM nb_log
+            WHERE ip_info != '未知'
+              AND ip_info != ''
+            GROUP BY ip_info
+        ) where rownum &lt;= 10
     </select>
 
     <select id="urlSummary" resultType="me.allen.newBlog.model.bo.EchartsUrlBo">
-        SELECT DATE_FORMAT(l.time, '%Y-%m-%d') as item, COUNT(*) as cnt
+        SELECT to_char(l.time, 'yyyy-MM-dd') as item, COUNT(*) as cnt
         FROM nb_log l
-        WHERE DATE_FORMAT(l.time, '%Y-%m-%d') >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
-          AND l.url NOT LIKE CONCAT('%', '/management/', '%')
-          AND l.url NOT LIKE CONCAT('%', '/upfiles/', '%')
-        GROUP BY DATE_FORMAT(l.time, '%Y-%m-%d')
-        ORDER BY DATE_FORMAT(l.time, '%Y-%m-%d') DESC
+        WHERE 1=1
+          AND l.time >= add_months(sysdate,-30)
+          AND l.url NOT LIKE '%' || '/management/' || '%'
+          AND l.url NOT LIKE '%' || '/upfiles/' || '%'
+        GROUP BY to_char(l.time, 'yyyy-MM-dd')
+        ORDER BY to_char(l.time, 'yyyy-MM-dd') DESC
     </select>
 
     <select id="browserSummary" resultType="me.allen.newBlog.model.bo.EchartsBo">
@@ -33,13 +35,13 @@
     <select id="todayVisit" resultType="long">
         select count(1)
         from nb_log l
-        where DATE_FORMAT(l.time, '%Y-%m-%d') = DATE_FORMAT(curdate(), '%Y-%m-%d')
+        where to_char(l.time, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')
     </select>
 
     <delete id="removeLogBeyondMonth">
         delete
         from nb_log
-        where TIMESTAMPDIFF(DAY, time, DATE_FORMAT(NOW(), '%Y-%m-%d')) >= 31
+        where to_date(to_char(t.time, 'yyyy-mm-dd'),'yyyy-mm-dd') - to_date(sysdate, 'yyyy-MM-dd') >= 31
     </delete>
 
 </mapper>

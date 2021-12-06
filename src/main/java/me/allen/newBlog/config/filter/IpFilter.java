@@ -43,7 +43,7 @@ public class IpFilter implements Filter{
     /**
      * 用户连续访问最高阀值，超过该值则认定为恶意操作的IP，进行限制
      */
-    private static final int LIMIT_NUMBER = 50;
+    private static final int LIMIT_NUMBER = 40;
 
     /**
      * 用户连续访问时间长度（单位：ms）

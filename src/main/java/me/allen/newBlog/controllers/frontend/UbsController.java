@@ -88,7 +88,7 @@ public class UbsController extends BaseController {
 
     @PostMapping("/purchase/{userId}")
     @ResponseBody
-    public LayuiTable<HideBo> myPurchases(Page<HideBo> replyPage, @PathVariable Long userId) {
+    public LayuiTable<HideBo> myPurchases(Page<HideBo> replyPage, @PathVariable String userId) {
         IPage<HideBo> newPage =
                 hideService.findMyPurchases(replyPage, userId);
         return new LayuiTable<>(newPage.getTotal(), newPage.getRecords());

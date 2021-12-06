@@ -20,5 +20,5 @@ public interface HideMapper extends BaseMapper<Hide> {
      * @param userId
      * @return
      */
-    IPage<HideBo> findMyPurchases(IPage<HideBo> page, @Param("userId") Long userId);
+    IPage<HideBo> findMyPurchases(IPage<HideBo> page, @Param("userId") String userId);
 }

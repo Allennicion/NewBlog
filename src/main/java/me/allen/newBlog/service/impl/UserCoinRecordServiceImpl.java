@@ -38,11 +38,11 @@ public class UserCoinRecordServiceImpl extends ServiceImpl<UserCoinRecordMapper,
     }
 
     @Override
-    public void calcAdminInsertRecord(int targetCoinValue, long userId) {
+    public void calcAdminInsertRecord(int targetCoinValue, String userId) {
         UserCoinRecord latestRecord = userCoinRecordMapper.findLatestRecordByUserId(userId);
         int latestRemainCoin = latestRecord.getRemainCoin();
         UserCoinRecord newLine = UserCoinRecord.builder()
-                .operateTime(new Date())
+                .operateDate(new Date())
                 .userId(userId)
                 .remainCoin(targetCoinValue)
                 .build();
@@ -60,19 +60,19 @@ public class UserCoinRecordServiceImpl extends ServiceImpl<UserCoinRecordMapper,
     }
 
     @Override
-    public int todayIsSigned(long userId) {
+    public int todayIsSigned(String userId) {
         return userCoinRecordMapper.todayIsSigned(userId, OperateType.SIGN_ADD);
     }
 
     @Override
-    public boolean userSign(long userId) {
+    public boolean userSign(String userId) {
         UserCoinRecord userCoinRecord = userCoinRecordMapper.findLatestRecordByUserId(userId);
         int remainCoin = userCoinRecord.getRemainCoin();
         Param param = paramMapper.selectOne(Wrappers.<Param>query().eq("name", "sign_check_coin"));
         int val = Integer.parseInt(param.getValue());
         int remainCoinAfterSign = remainCoin + val;
         UserCoinRecord ucr = UserCoinRecord.builder()
-                .operateTime(new Date()).remainCoin(remainCoinAfterSign).userId(userId).operateType(OperateType.SIGN_ADD)
+                .operateDate(new Date()).remainCoin(remainCoinAfterSign).userId(userId).operateType(OperateType.SIGN_ADD)
                 .operateValue(val).remark(OperateType.SIGN_ADD.getDesc()).build();
         int cnt = userCoinRecordMapper.insert(ucr);
         if (cnt == 1) {
@@ -90,7 +90,7 @@ public class UserCoinRecordServiceImpl extends ServiceImpl<UserCoinRecordMapper,
             int remainCoin = userCoinRecord.getRemainCoin();
             int remainCoinAfterSign = remainCoin + value;
             UserCoinRecord ucr = UserCoinRecord.builder()
-                    .operateTime(new Date()).remainCoin(remainCoinAfterSign).userId(user.getId()).operateType(OperateType.CASH_RECHARGE_ADD)
+                    .operateDate(new Date()).remainCoin(remainCoinAfterSign).userId(user.getId()).operateType(OperateType.CASH_RECHARGE_ADD)
                     .operateValue(value).remark(OperateType.CASH_RECHARGE_ADD.getDesc()).build();
             int cnt = userCoinRecordMapper.insert(ucr);
             if (cnt == 1) {

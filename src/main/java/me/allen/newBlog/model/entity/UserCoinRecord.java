@@ -1,5 +1,7 @@
 package me.allen.newBlog.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Builder;
 import lombok.Data;
 import me.allen.newBlog.enums.OperateType;
@@ -14,10 +16,11 @@ import java.util.Date;
 @Builder
 public class UserCoinRecord implements Serializable {
 
-    private Long id;
-    private Long userId;
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
+    private String userId;
     private OperateType operateType;
-    private Date operateTime;
+    private Date operateDate;
     private int operateValue;
     private int remainCoin;
     private String remark;
