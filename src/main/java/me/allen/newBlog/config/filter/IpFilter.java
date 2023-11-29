@@ -2,6 +2,7 @@ package me.allen.newBlog.config.filter;
 
 
 import me.allen.newBlog.constant.NBV5;
+import me.allen.newBlog.model.entity.Param;
 import me.allen.newBlog.service.ParamService;
 import me.allen.newBlog.service.impl.ParamServiceImpl;
 import me.allen.newBlog.utils.NbUtils;
@@ -198,7 +199,11 @@ public class IpFilter implements Filter{
             // 没有被限制
             return false;
         }
-        String blacklist = paramService.findByName(NBV5.IP_BLACKLIST).getValue();
+        String blacklist = "";
+        Param blackListParam = paramService.findByName(NBV5.IP_BLACKLIST);
+        if(blackListParam != null) {
+            blacklist = blackListParam.getValue();
+        }
         if (StringUtils.isEmpty(blacklist)) {
 
         } else {
