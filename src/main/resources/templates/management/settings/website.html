@@ -119,6 +119,19 @@
                     </div>
 
                     <div class="layui-form-item">
+                        <div class="layui-row layui-col-space15">
+                            <div class="layui-col-xs4 layui-col-sm3">
+                                <label class="layui-form-label">域名备案号</label>
+                            </div>
+                            <div class="layui-col-xs7 layui-col-sm8">
+                                <input type="text" name="record_words"
+                                       placeholder="请输入文本"
+                                       th:value="${record_words}"
+                                       autocomplete="off" class="layui-input"></div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
                         <div class="layui-row">
                             <div class="layui-col-xs7 layui-col-sm8 layui-col-xs-offset4 layui-col-sm-offset3">
                                 <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="settingsBatch">提交

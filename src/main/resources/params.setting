@@ -65,6 +65,7 @@ sign_check_coin = 每天签到加的硬币数量,0
 cash_recharge_url = 充值卡购买地址,[]
 seo_description = seo描述,
 seo_keyword = seo关键字,
+record_words = 皖ICP备2020017365号-4
 
 
 
