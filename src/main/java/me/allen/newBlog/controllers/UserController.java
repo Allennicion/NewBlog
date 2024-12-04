@@ -136,6 +136,7 @@ public class UserController extends BaseController {
                         int c = userService.userRegister(nbv5regUsername, nbv5regPassword, nbv5regMail, nbv5regNickname);
                         return handle(c == 1, "注册成功！", "注册失败！");
                     } catch (Exception e) {
+                        e.printStackTrace();
                         return ResultBeanObj.error("注册失败，错误信息：" + e.getMessage());
                     }
                 } else {

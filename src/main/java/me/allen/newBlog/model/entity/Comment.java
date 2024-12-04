@@ -1,5 +1,7 @@
 package me.allen.newBlog.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,16 +26,17 @@ import static java.time.LocalDateTime.now;
 @NoArgsConstructor
 public class Comment implements Serializable {
 
-    private Long id;
+    @TableId(type = IdType.UUID)
+    private String id;
     @NotNull
     private String articleId;
     @NotNull
-    private Long userId;
+    private String userId;
     private Long replyId;
     private String clearComment;
     @NotNull
     @Length(min = 1, max = 1000, message = "字数必须在1000字以内")
-    private String comment;
+    private String comments;
     @Builder.Default
     private Boolean enable = TRUE;
     private String ipAddr;

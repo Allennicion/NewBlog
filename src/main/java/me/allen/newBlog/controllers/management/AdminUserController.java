@@ -50,14 +50,14 @@ public class AdminUserController extends BaseController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public ResultBeanObj update(@RequestParam("id") Long id, boolean enable) {
+    public ResultBeanObj update(@RequestParam("id") String id, boolean enable) {
         boolean res = userService.update(Wrappers.<User>update().set("enable", enable).eq("id", id));
         return handle(res, "状态修改成功！", "状态修改失败！");
     }
 
     @RequestMapping("/update/nickname")
     @ResponseBody
-    public ResultBeanObj update(@RequestParam("id") Long id, String nickname) {
+    public ResultBeanObj update(@RequestParam("id") String id, String nickname) {
         User u = userService.getOne(Wrappers.<User>query().eq("nickname", nickname));
         if (u == null) {
             boolean res = userService.update(Wrappers.<User>update().set("nickname", nickname).eq("id", id));
@@ -69,7 +69,7 @@ public class AdminUserController extends BaseController {
 
     @RequestMapping("/update/remainCoin")
     @ResponseBody
-    public ResultBeanObj update(@RequestParam("id") Long id, Integer remainCoin) {
+    public ResultBeanObj update(@RequestParam("id") String id, Integer remainCoin) {
         boolean res = userService.update(Wrappers.<User>update().set("remain_coin", remainCoin).eq("id", id));
         if (res) {
             userCoinRecordService.calcAdminInsertRecord(remainCoin, id);

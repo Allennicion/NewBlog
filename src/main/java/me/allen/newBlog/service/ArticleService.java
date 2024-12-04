@@ -59,7 +59,7 @@ public interface ArticleService extends IService<Article> {
      * @return
      * @throws PinyinException
      */
-    int createArticle(Article article, List<Integer> cateIds, List<String> tagNames) throws PinyinException;
+    int createArticle(Article article, List<String> cateIds, List<String> tagNames) throws PinyinException;
 
     /**
      * 修改一篇文章
@@ -70,7 +70,7 @@ public interface ArticleService extends IService<Article> {
      * @return
      * @throws PinyinException
      */
-    int updateArticle(Article article, List<Integer> cateIds, List<String> tagNames) throws PinyinException;
+    int updateArticle(Article article, List<String> cateIds, List<String> tagNames) throws PinyinException;
 
     /**
      * 首页page
@@ -151,9 +151,9 @@ public interface ArticleService extends IService<Article> {
         if (isNew) {
             Date d = new Date();
             article.setPost(d);
-            article.setModify(d);
+            article.setModifyTime(d);
         } else {
-            article.setModify(new Date());
+            article.setModifyTime(new Date());
         }
         article.setViews(randomInt(666, 1609));
         article.setApproveCnt(randomInt(6, 169));
@@ -306,7 +306,7 @@ public interface ArticleService extends IService<Article> {
             if (visitingUser.getRole() == RoleEnum.ADMIN) {
                 contentHtml = handleShow(doc, contentHtml, HIDE_COMMENT);
             } else {
-                long userId = visitingUser.getId();
+                String userId = visitingUser.getId();
                 String articleId = article.getId();
                 CommentMapper commentMapper = NbUtils.getBean(CommentMapper.class);
                 int cnt = commentMapper.selectCount(Wrappers.<Comment>query().eq("article_id", articleId).eq("user_id", userId));
@@ -321,7 +321,7 @@ public interface ArticleService extends IService<Article> {
             if (visitingUser.getRole() == RoleEnum.ADMIN) {
                 contentHtml = handleShow(doc, contentHtml, HIDE_PURCHASE);
             } else {
-                long userId = visitingUser.getId();
+                String userId = visitingUser.getId();
                 String articleId = article.getId();
                 HideService hideService = NbUtils.getBean(HideService.class);
                 List<JXNode> hides = doc.selN(StrUtil.format("//blockquote[@data-htype='{}']", HIDE_PURCHASE));
@@ -398,17 +398,17 @@ public interface ArticleService extends IService<Article> {
         DictMapper dictMapper = NbUtils.getBean(DictMapper.class);
         JdbcTemplate jdbcTemplate = NbUtils.getBean(JdbcTemplate.class);
         for (String tagName : tagNames) {
-            boolean isExist = dictMapper.selectCount(Wrappers.<Dict>query().eq("name", tagName).eq("`group`", DictGroup.GROUP_TAG)) > 0;
-            long tagId;
+            boolean isExist = dictMapper.selectCount(Wrappers.<Dict>query().eq("name", tagName).eq("dict_group", DictGroup.GROUP_TAG)) > 0;
+            String tagId;
             if (isExist) {
-                Dict oldTag = dictMapper.selectOne(Wrappers.<Dict>query().eq("name", tagName).eq("`group`", DictGroup.GROUP_TAG));
+                Dict oldTag = dictMapper.selectOne(Wrappers.<Dict>query().eq("name", tagName).eq("dict_group", DictGroup.GROUP_TAG));
                 tagId = oldTag.getId();
             } else {
-                Dict newTag = Dict.builder().name(tagName).group(DictGroup.GROUP_TAG).build();
+                Dict newTag = Dict.builder().name(tagName).dictGroup(DictGroup.GROUP_TAG).build();
                 dictMapper.insert(newTag);
                 tagId = newTag.getId();
             }
-            jdbcTemplate.update("insert into refer_article_tag (article_id, tag_id) values (?,?);", articleId, tagId);
+            jdbcTemplate.update("insert into refer_article_tag (article_id, tag_id) values (?,?)", articleId, tagId);
         }
     }
 }

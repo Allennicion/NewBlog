@@ -123,7 +123,7 @@ public class ArticleController extends BaseController {
         if (purchaseUser == null) {
             return ResultBeanObj.custom(ResultBeanObj.LOGIN_INVALID, "请先登录再进行购买操作！").put("base", basePath(request));
         } else {
-            long userId = purchaseUser.getId();
+            String userId = purchaseUser.getId();
             int remainCoin = purchaseUser.getRemainCoin();
             int hidePrice = hideService.getById(hideId).getHidePrice();
             if (remainCoin >= hidePrice) {
@@ -132,7 +132,7 @@ public class ArticleController extends BaseController {
                     int cnt = hideService.purchaseArticleHideContent(articleId, hideId, userId);
                     if (cnt == 1) {
                         UserCoinRecord record = UserCoinRecord.builder()
-                                .operateTime(new Date()).remainCoin(remainCoin - hidePrice).userId(userId).operateType(OperateType.PURCHASE_MINUS)
+                                .operateDate(new Date()).remainCoin(remainCoin - hidePrice).userId(userId).operateType(OperateType.PURCHASE_MINUS)
                                 .operateValue(hidePrice).remark(OperateType.PURCHASE_MINUS.getDesc()).build();
                         userCoinRecordService.save(record);
                         updateSessionUser(request, userService.getById(userId));

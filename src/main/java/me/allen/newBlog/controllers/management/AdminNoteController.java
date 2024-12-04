@@ -81,7 +81,7 @@ public class AdminNoteController extends BaseController {
     public ResultBeanObj updateNote(@Valid Note nbNote, BindingResult result) {
         if (result.getErrorCount() == 0) {
             nbNote.setPost(null);
-            nbNote.setModify(new Date());
+            nbNote.setModifyTime(new Date());
             nbNote.setClearContent(HtmlUtil.cleanHtmlTag(nbNote.getContent()));
             boolean res = noteService.updateById(nbNote);
             return handle(res, "修改成功！", "修改失败！");

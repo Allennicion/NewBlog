@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.allen.newBlog.mapper.DictMapper">
+    <sql id="queryColumns">
+        t.id as id,
+        t.name as name,
+        t.dict_group as dictGroup
+    </sql>
+
+    <sql id="joinColumns">
+        left join nb_dict d on d.id = t.tag_id
+    </sql>
+
+    <select id="findTagsTab" resultType="java.util.Map">
+        select id as "id",name as "name",cnt as "cnt" from(
+        select t.id,t.name, count(a.tag_id) cnt from nb_dict t
+        right join refer_article_tag a on a.tag_id = t.id
+        group by t.name,t.id
+        order by cnt desc) t where rownum &lt; 30
+    </select>
+
+    <select id="findProductDict" resultType="me.allen.newBlog.model.entity.Dict">
+        select
+            <include refid="queryColumns"></include>
+        from nb_dict t
+        where rownum = 1
+    </select>
+</mapper>

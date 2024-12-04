@@ -32,20 +32,20 @@ public class HideServiceImpl extends ServiceImpl<HideMapper, Hide> implements Hi
     }
 
     @Override
-    public boolean userIsBought(String articleId, long userId, String hideId) {
+    public boolean userIsBought(String articleId, String userId, String hideId) {
         String sql = "select count(1) from refer_hide_user_purchase where article_id = ? and user_id = ? and hide_id = ?";
         String c = jdbcTemplate.queryForObject(sql, String.class, articleId, userId, hideId);
         return c != null && Integer.parseInt(c) == 1;
     }
 
     @Override
-    public int purchaseArticleHideContent(String articleId, String hideId, Long userId) {
+    public int purchaseArticleHideContent(String articleId, String hideId, String userId) {
         String sql = "insert into refer_hide_user_purchase(article_id,hide_id,user_id,purchase_time) values (?,?,?,now())";
         return jdbcTemplate.update(sql, articleId, hideId, userId);
     }
 
     @Override
-    public IPage<HideBo> findMyPurchases(IPage<HideBo> page, Long userId) {
+    public IPage<HideBo> findMyPurchases(IPage<HideBo> page, String userId) {
         return hideMapper.findMyPurchases(page, userId);
     }
 }

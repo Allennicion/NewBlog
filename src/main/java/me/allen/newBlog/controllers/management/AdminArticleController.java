@@ -49,7 +49,7 @@ public class AdminArticleController extends BaseController {
 
     @GetMapping("/add")
     public String publishArticlePage(HttpServletRequest request) {
-        request.setAttribute("cateList", dictService.list(Wrappers.<Dict>query().eq("`group`", DictGroup.GROUP_ARTICLE_CATE)));
+        request.setAttribute("cateList", dictService.list(Wrappers.<Dict>query().eq("dict_group", DictGroup.GROUP_ARTICLE_CATE)));
         request.setAttribute("generateNextArticleId", IdUtil.objectId());
         return "management/article/add";
     }
@@ -58,7 +58,7 @@ public class AdminArticleController extends BaseController {
     public String edit(Model model, String id, HttpServletRequest request) {
         Article article = articleService.getById(id);
         articleService.handleShowArticle(article, getSessionUser(request));
-        model.addAttribute("cateList", dictService.list(Wrappers.<Dict>query().eq("`group`", DictGroup.GROUP_ARTICLE_CATE)));
+        model.addAttribute("cateList", dictService.list(Wrappers.<Dict>query().eq("dict_group", DictGroup.GROUP_ARTICLE_CATE)));
         model.addAttribute("editArticle", article);
         model.addAttribute("tags", dictService.findTagsByArticleId(id));
         model.addAttribute("cates", dictService.findCatesByArticleId(id));
@@ -82,7 +82,7 @@ public class AdminArticleController extends BaseController {
     @PostMapping("/create")
     @ResponseBody
     public ResultBeanObj articleCreate(@Valid Article article, BindingResult result, HttpServletRequest request,
-                                       @RequestParam(required = false, value = "cateIds[]") List<Integer> cateIds,
+                                       @RequestParam(required = false, value = "cateIds[]") List<String> cateIds,
                                        @RequestParam(required = false, value = "tagNames[]") List<String> tagNames) {
         String generateNextArticleId = request.getParameter("generateNextArticleId");
         if (StringUtils.isEmpty(generateNextArticleId)) {
@@ -134,7 +134,7 @@ public class AdminArticleController extends BaseController {
     @PostMapping("/update")
     @ResponseBody
     public ResultBeanObj articleUpdate(@Valid Article article, BindingResult result, HttpServletRequest request,
-                                       @RequestParam(required = false, value = "cateIds[]") List<Integer> cateIds,
+                                       @RequestParam(required = false, value = "cateIds[]") List<String> cateIds,
                                        @RequestParam(required = false, value = "tagNames[]") List<String> tagNames) {
         if (result.getErrorCount() == 0) {
             if (cateIds.size() == 0) {

@@ -52,7 +52,7 @@ public class GlobalController {
             settingsMap.put("recharges", jsonArray);
             model.addAttribute("settings", settingsMap);
         } else {
-            List<Param> params = paramService.list(Wrappers.<Param>query().ge("`group`", 0));
+            List<Param> params = paramService.list(Wrappers.<Param>query().ge("param_group", 0));
             settingsMap = params.stream().collect(Collectors.toMap(Param::getName, p -> p.getValue() == null ? "" : p.getValue()));
             //noinspection unchecked
             Object rechargeUrl = settingsMap.getOrDefault("cash_recharge_url", "{\"name\":\"\",\"url\":\"\"}");

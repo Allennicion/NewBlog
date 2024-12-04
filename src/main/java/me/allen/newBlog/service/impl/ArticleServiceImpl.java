@@ -49,7 +49,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
-    public int createArticle(Article article, List<Integer> cateIds, List<String> tagNames) throws PinyinException {
+    public int createArticle(Article article, List<String> cateIds, List<String> tagNames) throws PinyinException {
         if (CollectionUtils.isEmpty(cateIds)) {
             throw new AppRunningException("文章至少得有一个分类归属！");
         }
@@ -81,7 +81,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
-    public int updateArticle(Article article, List<Integer> cateIds, List<String> tagNames) throws PinyinException {
+    public int updateArticle(Article article, List<String> cateIds, List<String> tagNames) throws PinyinException {
         if (CollectionUtils.isEmpty(cateIds)) {
             throw new AppRunningException("文章至少得有一个分类归属！");
         }
@@ -144,8 +144,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
-    public List<Article> findRandomArticles(int limit) {
-        return articleMapper.findRandomArticles(limit);
+    public List<Article> findRandomArticles(int rownu) {
+        return articleMapper.findRandomArticles(rownu);
     }
 
     /**

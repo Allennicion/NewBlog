@@ -1,5 +1,7 @@
 package me.allen.newBlog.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +22,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class User implements Serializable {
 
-    private Long id;
+
+    @TableId(type = IdType.UUID)
+    private String id;
     private RoleEnum role;
     private String avatar;
     private Date createDate;

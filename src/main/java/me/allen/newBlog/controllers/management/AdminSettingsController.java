@@ -55,7 +55,7 @@ public class AdminSettingsController extends BaseController {
 
     @GetMapping("/website")
     public String websitePage(Model model) {
-        List<Param> params = paramService.list(Wrappers.<Param>query().ge("`group`", 0));
+        List<Param> params = paramService.list(Wrappers.<Param>query().ge("param_group", 0));
         Map<String, Object> attributeMap = params.stream().collect(Collectors.toMap(Param::getName, p -> p.getValue() == null ? "" : p.getValue()));
         String rechargeUrl = attributeMap.getOrDefault("cash_recharge_url", "{\"name\":\"\",\"url\":\"\"}").toString();
         JSONArray jsonArray = JSONUtil.parseArray(rechargeUrl);

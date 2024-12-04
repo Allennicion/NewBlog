@@ -61,7 +61,7 @@ layui.define(['laytpl', 'laypage', 'timeago'], function (exports) {
         '           <span class="layui-mr15"><i class="fa fa-commenting-o"></i> 评论: <span style="font-weight: bold;font-style: italic;">{{ d.articleCommentCountMap[item.id] }}</span>条</span>' +
         '           {{# } }}' +
         '           <span style="margin-right: 20px;"><i class="fa fa-user-o"></i> 作者：<span style="font-weight: bold;color: #986b0d;font-style: italic;">{{ d.articleAuthors[item.id] }}</span></span>' +
-        '           <span style="margin-right: 20px;"><i class="fa fa-calendar"></i> 更新：<span style="font-weight: bold;font-style: italic;" class="timeago" datetime="{{ nbv5front.timeAgo(item.modify) }}"></span></span>' +
+        '           <span style="margin-right: 20px;"><i class="fa fa-calendar"></i> 更新：<span style="font-weight: bold;font-style: italic;" class="timeago" datetime="{{ nbv5front.timeAgo(item.modifyTime) }}"></span></span>' +
         '       </p>' +
         '</div>' +
         '</div>' +

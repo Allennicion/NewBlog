@@ -78,7 +78,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         int res = userMapper.insert(regUser);
         if (res == 1) {
             userCoinRecordMapper.insert(
-                    UserCoinRecord.builder().operateTime(new Date()).operateType(OperateType.INIT_REG)
+                    UserCoinRecord.builder().operateDate(new Date()).operateType(OperateType.INIT_REG)
                             .operateValue(0).remainCoin(0).remark(OperateType.INIT_REG.getDesc())
                             .userId(regUser.getId()).build()
             );

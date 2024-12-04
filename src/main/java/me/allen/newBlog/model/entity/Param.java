@@ -1,6 +1,7 @@
 package me.allen.newBlog.model.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,11 +16,11 @@ import java.io.Serializable;
 @Builder
 public class Param implements Serializable {
 
-    private Long id;
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
     private String name;
     private String value;
-    @TableField("`group`")
-    private String group;
+    private String paramGroup;
     private String remark;
     private Integer orderIndex;
 }

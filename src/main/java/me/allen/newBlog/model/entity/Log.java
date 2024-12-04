@@ -1,5 +1,7 @@
 package me.allen.newBlog.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,7 +15,8 @@ import java.util.Date;
 @Builder
 public class Log implements Serializable {
 
-    private Long id;
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
     private String contentType;
     private String ipAddr;
     private String ipInfo;
@@ -24,6 +27,6 @@ public class Log implements Serializable {
     private String username;
     private Date time;
     private String browser;
-    private Long userId;
+    private String userId;
 
 }

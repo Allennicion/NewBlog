@@ -18,7 +18,7 @@ public interface UserCoinRecordMapper extends BaseMapper<UserCoinRecord> {
      * @param userId
      * @return
      */
-    UserCoinRecord findLatestRecordByUserId(@Param("userId") long userId);
+    UserCoinRecord findLatestRecordByUserId(@Param("userId") String userId);
 
 
     /**
@@ -28,6 +28,6 @@ public interface UserCoinRecordMapper extends BaseMapper<UserCoinRecord> {
      * @param operateType
      * @return
      */
-    int todayIsSigned(@Param("userId") long userId, @Param("operateType") OperateType operateType);
+    int todayIsSigned(@Param("userId") String userId, @Param("operateType") OperateType operateType);
 
 }

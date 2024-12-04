@@ -27,7 +27,7 @@ public interface HideService extends IService<Hide> {
      * @param hideId
      * @return
      */
-    boolean userIsBought(String articleId, long userId, String hideId);
+    boolean userIsBought(String articleId, String userId, String hideId);
 
     /**
      * 购买文章隐藏内容
@@ -37,7 +37,7 @@ public interface HideService extends IService<Hide> {
      * @param userId
      * @return
      */
-    int purchaseArticleHideContent(String articleId, String hideId, Long userId);
+    int purchaseArticleHideContent(String articleId, String hideId, String userId);
 
     /**
      * 查找用户购买的主题
@@ -46,5 +46,5 @@ public interface HideService extends IService<Hide> {
      * @param userId
      * @return
      */
-    IPage<HideBo> findMyPurchases(IPage<HideBo> page, @Param("userId") Long userId);
+    IPage<HideBo> findMyPurchases(IPage<HideBo> page, @Param("userId") String userId);
 }

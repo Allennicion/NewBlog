@@ -59,7 +59,7 @@ public class QiniuUploadServiceImpl extends ServiceImpl<UploadMapper, Upload> im
     }
 
     @Override
-    public Object doUpload(Long sessionUserId, MultipartFile fileObj, String reqType, Map<Object, Object> paramMap) {
+    public Object doUpload(String sessionUserId, MultipartFile fileObj, String reqType, Map<Object, Object> paramMap) {
         log.info("上传[" + fileObj.getContentType() + "]类型文件");
         Response res = doUpload(fileObj, getUpToken());
         String message;
@@ -99,7 +99,7 @@ public class QiniuUploadServiceImpl extends ServiceImpl<UploadMapper, Upload> im
     }
 
     @Override
-    public Upload baseUpload(Long sessionUserId, MultipartFile fileObj, Map<Object, Object> paramMap) {
+    public Upload baseUpload(String sessionUserId, MultipartFile fileObj, Map<Object, Object> paramMap) {
         log.info("上传[" + fileObj.getContentType() + "]类型文件");
         Response res = doUpload(fileObj, getUpToken());
         try {

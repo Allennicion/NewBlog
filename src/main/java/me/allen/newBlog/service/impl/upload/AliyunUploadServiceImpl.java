@@ -65,7 +65,7 @@ public class AliyunUploadServiceImpl extends ServiceImpl<UploadMapper, Upload> i
     }
 
     @Override
-    public Object doUpload(Long sessionUserId, MultipartFile fileObj, String reqType, Map<Object, Object> paramMap) {
+    public Object doUpload(String sessionUserId, MultipartFile fileObj, String reqType, Map<Object, Object> paramMap) {
         //初始化OSSClient
         getOssClient();
 
@@ -90,7 +90,7 @@ public class AliyunUploadServiceImpl extends ServiceImpl<UploadMapper, Upload> i
     }
 
     @Override
-    public Upload baseUpload(Long sessionUserId, MultipartFile fileObj, Map<Object, Object> paramMap) {
+    public Upload baseUpload(String sessionUserId, MultipartFile fileObj, Map<Object, Object> paramMap) {
         //初始化OSSClient
         getOssClient();
         log.info("上传[" + fileObj.getContentType() + "]类型文件");

@@ -7,7 +7,7 @@
     <select id="findTodayUser" resultType="long">
         select count(1)
         from nb_user
-        where date_format(create_date, '%Y-%m-%d') = date_format(curdate(), '%Y-%m-%d')
+        where to_char(create_date, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')
     </select>
 
     <select id="countRegUserEmailAndUsername" resultType="int">

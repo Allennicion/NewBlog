@@ -83,7 +83,7 @@ public class InitListener implements ApplicationListener<ContextRefreshedEvent> 
                 String remark = remarkAndDefault[0];
                 String defaultValue = remarkAndDefault.length > 1 ? remarkAndDefault[1] : null;
                 Param param = Param.builder()
-                        .name(mapKey).group(groupStr).remark(remark).value(defaultValue).orderIndex(0)
+                        .name(mapKey).paramGroup(groupStr).remark(remark).value(defaultValue).orderIndex(0)
                         .build();
                 params.add(param);
             }
@@ -99,7 +99,7 @@ public class InitListener implements ApplicationListener<ContextRefreshedEvent> 
             log.info("不需要准备，跳过进行下一步...");
         } else {
             log.info("需要准备，开始准备...");
-            dictMapper.insert(Dict.builder().name(Dict.PRODUCT).group(DictGroup.GROUP_ARTICLE_CATE).build());
+            dictMapper.insert(Dict.builder().name(Dict.PRODUCT).dictGroup(DictGroup.GROUP_ARTICLE_CATE).build());
             log.info("准备分类完毕！");
         }
     }

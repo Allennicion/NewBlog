@@ -15,7 +15,7 @@ public interface UserCoinRecordService extends IService<UserCoinRecord> {
      * @param targetCoinValue
      * @param userId
      */
-    void calcAdminInsertRecord(int targetCoinValue, long userId);
+    void calcAdminInsertRecord(int targetCoinValue, String userId);
 
     /**
      * 用户今日是否已签到，返回签到的记录数
@@ -23,7 +23,7 @@ public interface UserCoinRecordService extends IService<UserCoinRecord> {
      * @param userId
      * @return
      */
-    int todayIsSigned(long userId);
+    int todayIsSigned(String userId);
 
     /**
      * 用户签到
@@ -31,7 +31,7 @@ public interface UserCoinRecordService extends IService<UserCoinRecord> {
      * @param userId
      * @return
      */
-    boolean userSign(long userId);
+    boolean userSign(String userId);
 
     /**
      * 用户卡密充值硬币

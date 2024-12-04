@@ -3,21 +3,33 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="me.allen.newBlog.mapper.UserCoinRecordMapper">
+    <sql id="queryColumns">
+        t.id as id,
+        t.user_id as userId,
+        t.operate_type as operateType,
+        t.operate_date as operateDate,
+        t.operate_value as operateValue,
+        t.remain_coin as remainCoin,
+        t.remark as remark
+    </sql>
 
     <select id="findLatestRecordByUserId" resultType="me.allen.newBlog.model.entity.UserCoinRecord">
-        select *
-        from nb_user_coin_record
-        where user_id = #{userId}
-        order by operate_time desc
-        limit 1
+        select * from(
+            select rownum rownu,
+                <include refid="queryColumns"></include>
+            from nb_user_coin_record t
+            where t.user_id = #{userId}
+            order by t.operate_date desc
+        ) where rownu = 1
     </select>
 
     <select id="todayIsSigned" resultType="int">
         select count(1)
         from nb_user_coin_record
-        where date_format(operate_time, '%Y-%m-%d') = date_format(curdate(), '%Y-%m-%d')
-          and operate_type = #{operateType}
-          and user_id = #{userId}
+        where 1=1
+            and to_date(operate_date, 'yyyy-MM-dd') = to_date(sysdate, 'yyyy-MM-dd')
+            and operate_type = #{operateType}
+            and user_id = #{userId}
     </select>
 
 </mapper>

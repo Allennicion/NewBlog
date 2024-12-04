@@ -80,7 +80,7 @@ public class ParamServiceImpl extends ServiceImpl<ParamMapper, Param> implements
             paramMapper.updateValueByName(NBV5.INFO_LABEL_NICKNAME, nickname);
             paramMapper.updateValueByName(NBV5.INFO_LABEL_LOGO, user.getAvatar());
             userCoinRecordMapper.insert(
-                    UserCoinRecord.builder().operateTime(new Date()).operateType(OperateType.INIT_REG)
+                    UserCoinRecord.builder().operateDate(new Date()).operateType(OperateType.INIT_REG)
                             .operateValue(0).remainCoin(0).remark(OperateType.INIT_REG.getDesc())
                             .userId(user.getId()).build()
             );

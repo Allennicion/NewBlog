@@ -3,6 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="me.allen.newBlog.mapper.MessageMapper">
+    <sql id="queryColumns">
+        t.id as id,
+        t.user_id as userId,
+        t.reply_id as replyId,
+        t.clear_comment as clearComment,
+        t.comments as comments,
+        t.enable as enable,
+        t.ip_addr as ipAddr,
+        t.ip_info as ipInfo,
+        t.post as post,
+        t.user_agent as userAgent
+    </sql>
+
+    <sql id="joinColumns">
+        left join nb_user u on u.id = t.user_id
+    </sql>
 
     <select id="findMessagePage" resultType="me.allen.newBlog.model.bo.MessageBo">
         select m.*, u.avatar, u.nickname, u.role
@@ -22,29 +38,33 @@
     </select>
 
     <select id="findLatestMessage" resultType="me.allen.newBlog.model.bo.MessageBo">
-        select m.*, u.avatar, u.nickname
-        from nb_message m
-                 left join nb_user u on u.id = m.user_id
-        order by m.post desc
-        limit 1
+        select * from (
+            select u.avatar, u.nickname,
+                <include refid="queryColumns"></include>
+            from nb_message t
+                <include refid="joinColumns"></include>
+            order by t.post desc
+        ) where rownum = 1
     </select>
 
     <select id="findTodayMessage" resultType="long">
         SELECT count(1)
         FROM nb_message
-        WHERE DATE_FORMAT(post, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d')
+        WHERE to_char(post, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')
     </select>
 
     <select id="findMessageRankBoList" resultType="me.allen.newBlog.model.bo.MessageRankBo">
-        SELECT m.user_id,
-               u.avatar,
-               u.nickname,
-               count(m.user_id)                as msg_cnt,
-               DATE_FORMAT(m.post, '%Y-%m-%d') as latest_msg_date
-        FROM nb_message m
-                 LEFT JOIN nb_user u ON u.id = m.user_id
-        GROUP BY m.user_id, m.post
-        ORDER BY msg_cnt DESC
-        LIMIT 15
+        select * from (
+            SELECT
+                   m.user_id,
+                   u.avatar,
+                   u.nickname,
+                   count(m.user_id) as msg_cnt,
+                   m.post as latest_msg_date
+            FROM nb_message m
+                     LEFT JOIN nb_user u ON u.id = m.user_id
+            GROUP BY m.user_id, m.post,u.avatar,u.nickname
+            ORDER BY msg_cnt DESC
+        ) where rownum &lt;= 15
     </select>
 </mapper>
